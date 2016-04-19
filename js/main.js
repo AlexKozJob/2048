@@ -289,7 +289,7 @@
                             }
                             gd.setCell(currentCell.x, currentCell.y, 0);
                             gd.setCell(currentCell.moveTo.x, currentCell.moveTo.y, cellVal);
-                            rd.moveCell(currentCell, ph.render);
+                            rd.moveCell(currentCell);
                             validStep = true;
                         }
                     }
