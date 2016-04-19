@@ -270,21 +270,20 @@
                 move = function (liveCells, depth){
                     var currentCell,
                         cellVal,
-                        validStep = false,
-                        newScore;
+                        validStep = false;
                     for (var i = 0; i < liveCells.length; i++){
                         currentCell = getPlan(liveCells[i], depth);
                         cellVal = currentCell.val;
                         if(currentCell.moveTo){
                             if(currentCell.merge) {
                                 cellVal *= 2;
-                                newScore = gd.updateScore(currentCell);
-                                if(ph.victoryCondition !==0 && newScore >= ph.victoryCondition){
+                                gd.updateScore(currentCell);
+                                if(ph.victoryCondition !==0 && cellVal >= ph.victoryCondition){
                                     ph.victoryCondition = 0;
                                     alert('2048! You won! ' +
                                         'But that is not the maximum possible value. ' +
                                         'Try score 131 072 (If this field is 4x4). The game continues ^_^');
-                                }else if(newScore >= 131072){
+                                }else if(cellVal >= 131072){
                                     alert('Cheater!!11');
                                 }
                             }
