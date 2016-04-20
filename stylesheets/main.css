@@ -1,0 +1,97 @@
+body{
+    font-family: sans-serif;
+}
+#gameBox > div, #gameBox{
+    margin: auto;
+    margin-bottom: 4px;
+}
+#gameBox{
+    display: table;
+}
+#gameInfo, #reset{
+    background-color: #4a4a4a;
+    color:#f9f6f2;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+ }
+#reset{
+    text-align: center;
+}
+#reset:hover{
+    color:#cbf973;
+    cursor: pointer;
+}
+#gameField{
+    display: table;
+    table-layout: fixed;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #4a4a4a;
+    line-height: 0;
+}
+#gameField > div{
+    display: table-row;
+}
+[data-coord]{
+    display: inline-block;
+    padding: 0;
+    background: #BBADA0;
+    border: 2px solid rgba(74, 74, 74, 1);
+    border-radius: 5px;
+}
+[data-coord]>div{
+    display: table-cell;
+    position: relative;
+    border-radius: 2px;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+}
+[data-value]>div{
+    color: #776E65;
+}
+[data-value="2"]>div{
+    background: #EEE4DA;
+}
+[data-value="4"]>div{
+    background: #EDE0C8;
+}
+[data-value="8"]>div{
+    color:#F9F6F2;
+    background: #F2B179;
+}
+[data-value="16"]>div{
+    color:#F9F6F2;
+    background: #F59563;
+}
+[data-value="32"]>div{
+    color:#F9F6F2;
+    background: #F67C5F;
+}
+[data-value="64"]>div{
+    color:#F9F6F2;
+    background: #F65E3B;
+}
+[data-value="128"]>div{
+    color: #f9f6f2;
+    background: #edcf72;
+}
+[data-value="256"]>div{
+    color: #f9f6f2;
+    background: #edcc61;
+}
+[data-value="512"]>div{
+    color: #f9f6f2;
+    background: #edc850;
+}
+[data-value="1024"]>div{
+    color: #f9f6f2;
+    background: #edc53f;
+}
+[data-value="2048"]>div{
+    color: #f9f6f2;
+    background: #edc22e;
+}

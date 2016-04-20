@@ -7,7 +7,7 @@
     <meta name="description" content="2048 : 2048">
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/main.css">
     <title>2048</title>
   </head>
 
@@ -31,7 +31,16 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-
+          <div id="gameBox">
+              <div id="gameInfo">
+                  <p id="turn">Step number: <span>1</span></p>
+                  <p id="score">Score: <span>0</span></p>
+              </div>
+              <div id="gameField"></div>
+              <div id="reset">
+                  Reset
+              </div>
+          </div>
       </section>
     </div>
 
@@ -42,8 +51,8 @@
         <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-
-    
-
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="javascripts/colorAnimation.js"></script>
+    <script src="javascripts/main.js"></script>
   </body>
 </html>
