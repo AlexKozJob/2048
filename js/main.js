@@ -227,45 +227,45 @@
                 rd = new Render(ph),
                 gd = new GameData(ph.size),
                 getPlan = function (thisCell, depth){
-                var newDirect = {},
-                    viewingCellValue,
-                    recursionData;
-                thisCell.moveTo = null;
-                thisCell.merge = false;
-                newDirect.x = thisCell.x + (ph.direct_x * depth);
-                newDirect.y = thisCell.y + (ph.direct_y * depth);
-                viewingCellValue = gd.getCell(newDirect.x, newDirect.y);
-                if(viewingCellValue === 0){
-                    recursionData = getPlan(thisCell, depth+1);
-                    if(recursionData){
-                        thisCell = recursionData;
-                    }
-                }else if(viewingCellValue === null){
-                    if(depth > 1){
-                        newDirect.x = thisCell.x + (ph.direct_x * (depth-1));
-                        newDirect.y = thisCell.y + (ph.direct_y * (depth-1));
-                        thisCell.moveTo = {x: newDirect.x, y: newDirect.y};
-                    }
-                }else if(viewingCellValue > 0){
-                    if(thisCell.val === viewingCellValue){
-                        if(gd.generatedInThisStep[newDirect.y][newDirect.x] === 0){
-                            thisCell.moveTo = {x: newDirect.x, y: newDirect.y};
-                            gd.generatedInThisStep[newDirect.y][newDirect.x] = 1;
-                            thisCell.merge = true;
-                        }else{
+                    var newDirect = {},
+                        viewingCellValue,
+                        recursionData;
+                    thisCell.moveTo = null;
+                    thisCell.merge = false;
+                    newDirect.x = thisCell.x + (ph.direct_x * depth);
+                    newDirect.y = thisCell.y + (ph.direct_y * depth);
+                    viewingCellValue = gd.getCell(newDirect.x, newDirect.y);
+                    if(viewingCellValue === 0){
+                        recursionData = getPlan(thisCell, depth+1);
+                        if(recursionData){
+                            thisCell = recursionData;
+                        }
+                    }else if(viewingCellValue === null){
+                        if(depth > 1){
                             newDirect.x = thisCell.x + (ph.direct_x * (depth-1));
                             newDirect.y = thisCell.y + (ph.direct_y * (depth-1));
                             thisCell.moveTo = {x: newDirect.x, y: newDirect.y};
                         }
-                    }else if(depth > 1){
-                        newDirect.x = thisCell.x + (ph.direct_x * (depth-1));
-                        newDirect.y = thisCell.y + (ph.direct_y * (depth-1));
-                        thisCell.moveTo = {x: newDirect.x, y: newDirect.y};
+                    }else if(viewingCellValue > 0){
+                        if(thisCell.val === viewingCellValue){
+                            if(gd.generatedInThisStep[newDirect.y][newDirect.x] === 0){
+                                thisCell.moveTo = {x: newDirect.x, y: newDirect.y};
+                                gd.generatedInThisStep[newDirect.y][newDirect.x] = 1;
+                                thisCell.merge = true;
+                            }else{
+                                newDirect.x = thisCell.x + (ph.direct_x * (depth-1));
+                                newDirect.y = thisCell.y + (ph.direct_y * (depth-1));
+                                thisCell.moveTo = {x: newDirect.x, y: newDirect.y};
+                            }
+                        }else if(depth > 1){
+                            newDirect.x = thisCell.x + (ph.direct_x * (depth-1));
+                            newDirect.y = thisCell.y + (ph.direct_y * (depth-1));
+                            thisCell.moveTo = {x: newDirect.x, y: newDirect.y};
+                        }
+                    }else{
+                        return false;
                     }
-                }else{
-                    return false;
-                }
-                return thisCell;
+                    return thisCell;
                 },
                 move = function (liveCells, depth){
                     var currentCell,
@@ -454,12 +454,11 @@
         var ga = new GameActions(),
             resetButton = document.getElementById('reset');
         ga.init();
-        window.addEventListener('keyup', function(e){
+        window.addEventListener("keydown", function(e) {
             e.preventDefault();
             ga.validStep(e.keyCode);
         }, false);
         resetButton.addEventListener('click', function(e){
-            e.preventDefault();
             ga.init();
         }, false);
     };
