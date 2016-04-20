@@ -1,2 +1,5 @@
 # 2048
-2048 js game
+Only game algorithm and a little CSS.
+
+[View demo.](http://alexkozjob.github.io/2048/)
+
