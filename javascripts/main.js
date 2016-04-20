@@ -2,7 +2,7 @@
 (function(){
     var Phar = function(){
             var renderPhar = {
-              borderSize: 0,
+                borderSize: 0,
                 cellSize:80,
                 duration: 150
             };
@@ -80,7 +80,7 @@
                     return stepIsUnlocked;
                 },
                 toggleLockingStep: function(){
-                        stepIsUnlocked = !stepIsUnlocked;
+                    stepIsUnlocked = !stepIsUnlocked;
                 },
                 resetDataOnMergers: function(){
                     this.generatedInThisStep = tools.genMt(size);
@@ -206,11 +206,11 @@
                 },
                 wrongStep: function(){
                     $(gameFieldObj).animate({'backgroundColor': '#D5421C'}, {
-                            duration: ph.render.duration,
-                            complete: function(){
-                                $(gameFieldObj).animate({'backgroundColor': '#4a4a4a'}, ph.render.duration);
-                            }
-                        });
+                        duration: ph.render.duration,
+                        complete: function(){
+                            $(gameFieldObj).animate({'backgroundColor': '#4a4a4a'}, ph.render.duration);
+                        }
+                    });
                 },
                 updateGameInfo: function(type, val){
                     if(type === 'turn'){
@@ -227,45 +227,45 @@
                 rd = new Render(ph),
                 gd = new GameData(ph.size),
                 getPlan = function (thisCell, depth){
-                var newDirect = {},
-                    viewingCellValue,
-                    recursionData;
-                thisCell.moveTo = null;
-                thisCell.merge = false;
-                newDirect.x = thisCell.x + (ph.direct_x * depth);
-                newDirect.y = thisCell.y + (ph.direct_y * depth);
-                viewingCellValue = gd.getCell(newDirect.x, newDirect.y);
-                if(viewingCellValue === 0){
-                    recursionData = getPlan(thisCell, depth+1);
-                    if(recursionData){
-                        thisCell = recursionData;
-                    }
-                }else if(viewingCellValue === null){
-                    if(depth > 1){
-                        newDirect.x = thisCell.x + (ph.direct_x * (depth-1));
-                        newDirect.y = thisCell.y + (ph.direct_y * (depth-1));
-                        thisCell.moveTo = {x: newDirect.x, y: newDirect.y};
-                    }
-                }else if(viewingCellValue > 0){
-                    if(thisCell.val === viewingCellValue){
-                        if(gd.generatedInThisStep[newDirect.y][newDirect.x] === 0){
-                            thisCell.moveTo = {x: newDirect.x, y: newDirect.y};
-                            gd.generatedInThisStep[newDirect.y][newDirect.x] = 1;
-                            thisCell.merge = true;
-                        }else{
+                    var newDirect = {},
+                        viewingCellValue,
+                        recursionData;
+                    thisCell.moveTo = null;
+                    thisCell.merge = false;
+                    newDirect.x = thisCell.x + (ph.direct_x * depth);
+                    newDirect.y = thisCell.y + (ph.direct_y * depth);
+                    viewingCellValue = gd.getCell(newDirect.x, newDirect.y);
+                    if(viewingCellValue === 0){
+                        recursionData = getPlan(thisCell, depth+1);
+                        if(recursionData){
+                            thisCell = recursionData;
+                        }
+                    }else if(viewingCellValue === null){
+                        if(depth > 1){
                             newDirect.x = thisCell.x + (ph.direct_x * (depth-1));
                             newDirect.y = thisCell.y + (ph.direct_y * (depth-1));
                             thisCell.moveTo = {x: newDirect.x, y: newDirect.y};
                         }
-                    }else if(depth > 1){
-                        newDirect.x = thisCell.x + (ph.direct_x * (depth-1));
-                        newDirect.y = thisCell.y + (ph.direct_y * (depth-1));
-                        thisCell.moveTo = {x: newDirect.x, y: newDirect.y};
+                    }else if(viewingCellValue > 0){
+                        if(thisCell.val === viewingCellValue){
+                            if(gd.generatedInThisStep[newDirect.y][newDirect.x] === 0){
+                                thisCell.moveTo = {x: newDirect.x, y: newDirect.y};
+                                gd.generatedInThisStep[newDirect.y][newDirect.x] = 1;
+                                thisCell.merge = true;
+                            }else{
+                                newDirect.x = thisCell.x + (ph.direct_x * (depth-1));
+                                newDirect.y = thisCell.y + (ph.direct_y * (depth-1));
+                                thisCell.moveTo = {x: newDirect.x, y: newDirect.y};
+                            }
+                        }else if(depth > 1){
+                            newDirect.x = thisCell.x + (ph.direct_x * (depth-1));
+                            newDirect.y = thisCell.y + (ph.direct_y * (depth-1));
+                            thisCell.moveTo = {x: newDirect.x, y: newDirect.y};
+                        }
+                    }else{
+                        return false;
                     }
-                }else{
-                    return false;
-                }
-                return thisCell;
+                    return thisCell;
                 },
                 move = function (liveCells, depth){
                     var currentCell,
@@ -329,21 +329,21 @@
                 },
                 addCells = function(n){
                     var coords = (function(size, n){
-                        var rKey, free = [], newCells = [];
-                        for(var mt_y = 0; mt_y < size; mt_y++){
-                            for(var mt_x = 0; mt_x < size; mt_x++){
-                                if(gd.getCell(mt_x, mt_y) === 0){
-                                    free.push({x:mt_x, y:mt_y})
+                            var rKey, free = [], newCells = [];
+                            for(var mt_y = 0; mt_y < size; mt_y++){
+                                for(var mt_x = 0; mt_x < size; mt_x++){
+                                    if(gd.getCell(mt_x, mt_y) === 0){
+                                        free.push({x:mt_x, y:mt_y})
+                                    }
                                 }
                             }
-                        }
-                        for(var i = 0; i < n; i++){
-                            rKey = tools.rand(0, free.length - 1);
-                            newCells.push(free[rKey]);
-                            free.splice(rKey, 1);
-                        }
-                        return newCells;
-                    })(ph.size, n),
+                            for(var i = 0; i < n; i++){
+                                rKey = tools.rand(0, free.length - 1);
+                                newCells.push(free[rKey]);
+                                free.splice(rKey, 1);
+                            }
+                            return newCells;
+                        })(ph.size, n),
                         basicValue = 2;
 
                     for(var i = 0; i < coords.length; i++){
@@ -448,18 +448,17 @@
                 }
                 return result;
             }
-    };
+        };
 
     window.onload = function(){
         var ga = new GameActions(),
             resetButton = document.getElementById('reset');
         ga.init();
-        window.addEventListener('keyup', function(e){
+        window.addEventListener("keydown", function(e) {
             e.preventDefault();
             ga.validStep(e.keyCode);
         }, false);
         resetButton.addEventListener('click', function(e){
-            e.preventDefault();
             ga.init();
         }, false);
     };
