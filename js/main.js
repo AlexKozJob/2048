@@ -361,28 +361,10 @@
                         }
                     }
                 },
-                makeStep = function(keyCode){
-                    var liveCells = gd.getLiveCells(ph.size),
-                        toggle;
-                    if(liveCells){
-                        switch(keyCode) {
-                            case ph.direction.left.keyCode:
-                                toggle = 'left';
-                                break;
-                            case ph.direction.right.keyCode:
-                                liveCells = tools.reversedCopy(liveCells);
-                                toggle = 'right';
-                                break;
-                            case ph.direction.up.keyCode:
-                                toggle = 'up';
-                                break;
-                            case ph.direction.down.keyCode:
-                                liveCells = tools.reversedCopy(liveCells);
-                                toggle = 'down';
-                                break;
-                            default :
-                                throw new Error("[Game Error] Switch the key code that has gone wrong.");
-                        }
+                makeStep = function(toggle){
+                    var liveCells = gd.getLiveCells(ph.size);
+                    if(liveCells && toggle){
+                        if(toggle === 'right' || toggle === 'down') liveCells = tools.reversedCopy(liveCells);
                         ph.direct_x = ph.direction[toggle].x;
                         ph.direct_y = ph.direction[toggle].y;
                         return move(liveCells, 1);
@@ -398,14 +380,10 @@
                 };
             return {
                 init: resetGame,
-                validStep: function(kc){
-                    if(kc === ph.direction.down.keyCode ||
-                        kc === ph.direction.up.keyCode ||
-                        kc === ph.direction.left.keyCode ||
-                        kc === ph.direction.right.keyCode){
+                validStep: function(toggle){
                         if(gd.getStepIsUnlocked()){
                             gd.toggleLockingStep();
-                            if(makeStep(kc)){
+                            if(makeStep(toggle)){
                                 setTimeout(function(){
                                     addCells(1);
                                     if(thisGameIsOver(ph.direction)){
@@ -420,8 +398,9 @@
                                 rd.wrongStep();
                                 gd.toggleLockingStep();
                             }
+                            return true;
                         }
-                    }
+                    return false;
                 }
             };
         },
@@ -448,18 +427,76 @@
                 }
                 return result;
             }
-    };
+        },
+        events = (function (){
+            var ph = new Phar(),
+                gameField = document.getElementById("gameField"),
+                keyDirection = function (ga) {
+                    return window.addEventListener("keydown", function(e) {
+                        var toggle = false;
+                        switch (e.keyCode){
+                            case ph.direction.up.keyCode:
+                                toggle = 'up';
+                                break;
+                            case ph.direction.left.keyCode:
+                                toggle = 'left';
+                                break;
+                            case ph.direction.down.keyCode:
+                                toggle = 'down';
+                                break;
+                            case ph.direction.right.keyCode:
+                                toggle = 'right';
+                                break;
+                        }
+                        if(toggle) e.preventDefault();
+                        return ga.validStep(toggle);
+                    }, false);
+                },
+                reset = function(ga){
+                   return document.getElementById('reset').addEventListener('click', ga.init, false);
+                },
+                touchDirection = function(ga){
+                    var touchPosition = [];
+                    gameField.addEventListener("touchstart", function(e) {
+                        e.preventDefault();
+                        touchPosition.push({
+                            x: e.changedTouches[0].screenX,
+                            y: e.changedTouches[0].screenY
+                        });
+                    }, false);
+                    gameField.addEventListener("touchend", function(e) {
+                        e.preventDefault();
+                        var directionTop,
+                            directionLeft,
+                            sensitivity = 5,
+                            toggle = false;
+                        touchPosition.push({
+                            x: e.changedTouches[0].screenX,
+                            y: e.changedTouches[0].screenY
+                        });
+                        directionTop = touchPosition[0].y - touchPosition[1].y;
+                        directionLeft = touchPosition[0].x - touchPosition[1].x;
+                        if (directionTop > 0 && directionTop > directionLeft && directionTop > sensitivity){
+                            toggle = 'up';
+                        }else if(directionLeft > 0 && directionLeft > directionTop && directionLeft > sensitivity){
+                            toggle = 'left';
+                        }else if(directionTop < 0 && Math.abs(directionTop) > Math.abs(directionLeft) && Math.abs(directionTop) > sensitivity){
+                            toggle = 'down';
+                        }else if(directionLeft < 0 && Math.abs(directionLeft) > Math.abs(directionTop) && Math.abs(directionLeft) > sensitivity){
+                            toggle = 'right';
+                        }
+                        ga.validStep(toggle);
+                        touchPosition = [];
+                        return false;
+                    }, false);
+                };
 
-    window.onload = function(){
-        var ga = new GameActions(),
-            resetButton = document.getElementById('reset');
-        ga.init();
-        window.addEventListener("keydown", function(e) {
-            e.preventDefault();
-            ga.validStep(e.keyCode);
-        }, false);
-        resetButton.addEventListener('click', function(e){
-            ga.init();
-        }, false);
-    };
+            return window.onload = function(){
+                var ga = new GameActions();
+                ga.init();
+                keyDirection(ga);
+                touchDirection(ga);
+                reset(ga);
+            };
+        })();
 })();
