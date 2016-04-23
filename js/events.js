@@ -49,16 +49,15 @@
                             });
                             directionTop = touchPosition[0].y - touchPosition[1].y;
                             directionLeft = touchPosition[0].x - touchPosition[1].x;
-                            if (directionTop > 0 && directionTop > Math.abs(directionLeft) + sensitivity && directionTop > sensitivity){
+                            if (directionTop > 0 && Math.abs(directionTop) > Math.abs(directionLeft) + sensitivity && Math.abs(directionTop) > sensitivity){
                                 toggle = 'up';
-                            }else if(directionLeft > 0 && directionLeft > directionTop + sensitivity && directionLeft > sensitivity){
+                            }else if(directionLeft > 0 && Math.abs(directionLeft) > Math.abs(directionTop) + sensitivity && Math.abs(directionLeft) > sensitivity){
                                 toggle = 'left';
                             }else if(directionTop < 0 && Math.abs(directionTop) > Math.abs(directionLeft) + sensitivity && Math.abs(directionTop) > sensitivity){
                                 toggle = 'down';
                             }else if(directionLeft < 0 && Math.abs(directionLeft) > Math.abs(directionTop) + sensitivity && Math.abs(directionLeft) > sensitivity){
                                 toggle = 'right';
                             }
-                            if(toggle)e.preventDefault();
                             ga.validStep(toggle);
                             touchPosition = [];
                         }
