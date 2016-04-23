@@ -49,7 +49,7 @@
                             });
                             directionTop = touchPosition[0].y - touchPosition[1].y;
                             directionLeft = touchPosition[0].x - touchPosition[1].x;
-                            if (directionTop > 0 && directionTop > directionLeft && directionTop > sensitivity){
+                            if (directionTop > 0 && directionTop > Math.abs(directionLeft) + sensitivity && directionTop > sensitivity){
                                 toggle = 'up';
                             }else if(directionLeft > 0 && directionLeft > directionTop + sensitivity && directionLeft > sensitivity){
                                 toggle = 'left';
