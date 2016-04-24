@@ -47,7 +47,8 @@
             move = function (liveCells, depth){
                 var currentCell,
                     cellVal,
-                    validStep = false;
+                    validStep = false,
+                    expectAnimation = [];
                 for (var i = 0; i < liveCells.length; i++){
                     currentCell = getPlan(liveCells[i], depth);
                     cellVal = currentCell.val;
@@ -59,17 +60,16 @@
                                 ph.victoryCondition = 0;
                                 alert('2048! You won! ' +
                                     'But that is not the maximum possible value. ' +
-                                    'Try score 131 072 (If this field is 4x4). The game continues ^_^');
-                            }else if(cellVal >= 131072){
-                                alert('Cheater!!11');
+                                    'Try to get a 131 072 cell value. The game continues ^_^');
                             }
                         }
                         gd.setCell(currentCell.x, currentCell.y, 0);
                         gd.setCell(currentCell.moveTo.x, currentCell.moveTo.y, cellVal);
-                        rd.moveCell(currentCell);
+                        expectAnimation.push(currentCell);
                         validStep = true;
                     }
                 }
+                rd.moveCell(expectAnimation);
                 rd.updateGameInfo('score', gd.getScore());
                 gd.resetDataOnMergers();
                 return validStep;
@@ -150,7 +150,7 @@
             },
             resetGame = function(){
                 gd = new app.GameData(ph.size);
-                rd.generatePlayingField();
+                rd.reset();
                 addCells(3);
                 rd.updateGameInfo('score', gd.getScore());
                 rd.updateGameInfo('turn', gd.getTurn());

@@ -29,7 +29,7 @@
                 touchDirection = function(ga){
                     var touchPosition = [];
                     document.addEventListener("touchstart", function(e) {
-                        if(e.path[0].id !== "reset"){
+                        if(e.target.id !== "reset"){
                             e.preventDefault();
                             touchPosition.push({
                                 x: e.changedTouches[0].screenX,
@@ -42,7 +42,8 @@
                             directionLeft,
                             sensitivity = 20,
                             toggle = false;
-                        if(e.path[0].id !== "reset"){
+                        if(e.target.id !== "reset"){
+                            e.preventDefault();
                             touchPosition.push({
                                 x: e.changedTouches[0].screenX,
                                 y: e.changedTouches[0].screenY
@@ -64,13 +65,12 @@
                         return false;
                     }, false);
                 };
-
-            return window.onload = function(){
+            return document.addEventListener("DOMContentLoaded", function(event) {
                 var ga = new app.GameActions();
                 ga.init();
                 keyDirection(ga);
                 touchDirection(ga);
                 reset(ga);
-            };
+            });
         })();
 })(app2048);
