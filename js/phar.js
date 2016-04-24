@@ -13,12 +13,12 @@ var app2048 = {};
             borderSize: 0,
             duration: 150
         };
-        if(renderPhar.contentBlock.offsetWidth > screen.height){
+        if(screen.width > screen.height){
             renderPhar.cellSize = screen.height / (renderPhar.fieldSize * 2);
-            if(renderPhar.cellSize > 80) renderPhar.cellSize = 80;
         }else{
-            renderPhar.cellSize = renderPhar.contentBlock.offsetWidth / (renderPhar.fieldSize + 2);
+            renderPhar.cellSize = screen.width / (renderPhar.fieldSize + 2);
         }
+        if(renderPhar.cellSize > 100) renderPhar.cellSize = 100;
         renderPhar.fullCellSize = renderPhar.borderSize * 2 + renderPhar.cellSize;
         renderPhar.getFontSize = function (textLength){
             var result = renderPhar.cellSize / 2;
