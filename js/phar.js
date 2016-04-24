@@ -14,7 +14,9 @@ var app2048 = {};
             duration: 150,
             screen: (screen.width < screen.height) ? screen.width : screen.height
         };
-        renderPhar.cellSize = (screen.width > 768) ? 80 : screen.width / (renderPhar.fieldSize + 1);
+        console.log(renderPhar.contentBlock.offsetWidth);
+        renderPhar.cellSize = (renderPhar.contentBlock.offsetWidth > 768) ? 80 : renderPhar.contentBlock.offsetWidth / (renderPhar.fieldSize + 2);
+        console.log(renderPhar.cellSize);
         if(renderPhar.cellSize > 80) renderPhar.cellSize = 80;
         console.log(renderPhar.cellSize);
         renderPhar.fullCellSize = renderPhar.borderSize * 2 + renderPhar.cellSize;
