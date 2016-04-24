@@ -15,10 +15,10 @@ var app2048 = {};
         };
         if(renderPhar.contentBlock.offsetWidth > screen.height){
             renderPhar.cellSize = screen.height / (renderPhar.fieldSize * 2);
+            if(renderPhar.cellSize > 80) renderPhar.cellSize = 80;
         }else{
-            renderPhar.cellSize = 80;
+            renderPhar.cellSize = renderPhar.contentBlock.offsetWidth / (renderPhar.fieldSize + 2);
         }
-        if(renderPhar.cellSize > 80) renderPhar.cellSize = 80;
         renderPhar.fullCellSize = renderPhar.borderSize * 2 + renderPhar.cellSize;
         renderPhar.getFontSize = function (textLength){
             var result = renderPhar.cellSize / 2;
