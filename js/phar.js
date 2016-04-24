@@ -11,11 +11,12 @@ var app2048 = {};
             resetBlock: document.getElementById("reset"),
             fieldSize: 4,
             borderSize: 0,
-            duration: 150,
-            screen: (screen.width < screen.height) ? screen.width : screen.height
-        };
+            duration: 150
+        },
+            minScreen = (renderPhar.contentBlock.offsetWidth > screen.height)?  screen.height: renderPhar.contentBlock.offsetWidth;
         console.log(renderPhar.contentBlock.offsetWidth);
-        renderPhar.cellSize = (renderPhar.contentBlock.offsetWidth > 768) ? 80 : renderPhar.contentBlock.offsetWidth / (renderPhar.fieldSize + 2);
+        console.log(screen.height);
+        renderPhar.cellSize = (minScreen > 768) ? 80 : minScreen / (renderPhar.fieldSize + 4);
         console.log(renderPhar.cellSize);
         if(renderPhar.cellSize > 80) renderPhar.cellSize = 80;
         console.log(renderPhar.cellSize);
