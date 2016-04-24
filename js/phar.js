@@ -14,9 +14,9 @@ var app2048 = {};
             duration: 150
         };
         if(renderPhar.contentBlock.offsetWidth > screen.height){
-            renderPhar.cellSize = screen.height / (renderPhar.fieldSize * 2.5);
+            renderPhar.cellSize = screen.height / (renderPhar.fieldSize * 2);
         }else{
-            renderPhar.cellSize = renderPhar.contentBlock.offsetWidth / (renderPhar.fieldSize + 1);
+            renderPhar.cellSize = 80;
         }
         if(renderPhar.cellSize > 80) renderPhar.cellSize = 80;
         renderPhar.fullCellSize = renderPhar.borderSize * 2 + renderPhar.cellSize;
