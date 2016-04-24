@@ -13,7 +13,11 @@ var app2048 = {};
             borderSize: 0,
             duration: 150
         };
-        if(renderPhar.contentBlock.clientWidth > screen.height){
+        alert('screen w:' +screen.width);
+        alert('screen h:' +screen.height);
+        alert('screen h:' +screen.height);
+        alert('clientWidth:' +renderPhar.contentBlock.clientWidth);
+        if(screen.width > screen.height){
             renderPhar.cellSize = screen.height / renderPhar.fieldSize / 4;
             if(renderPhar.cellSize > 80) renderPhar.cellSize = 80;
         }else{
