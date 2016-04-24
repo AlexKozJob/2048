@@ -15,6 +15,8 @@ var app2048 = {};
             screen: (screen.width < screen.height) ? screen.width : screen.height
         };
         renderPhar.cellSize = (screen.width > 768) ? 80 : (screen.width / renderPhar.fieldSize) * 0.75;
+        console.log(renderPhar.cellSize);
+        if(renderPhar.cellSize > 80) renderPhar.cellSize = 80;
         renderPhar.fullCellSize = renderPhar.borderSize * 2 + renderPhar.cellSize;
         renderPhar.getFontSize = function (textLength){
             var result = renderPhar.cellSize / 2;
