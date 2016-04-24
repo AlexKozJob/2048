@@ -13,7 +13,7 @@ var app2048 = {};
             borderSize: 0,
             duration: 150
         };
-        if(screen.width > screen.height){
+        if(renderPhar.contentBlock.clientWidth > screen.height){
             renderPhar.cellSize = screen.height / renderPhar.fieldSize / 2;
             if(renderPhar.cellSize > 80) renderPhar.cellSize = 80;
         }else{
