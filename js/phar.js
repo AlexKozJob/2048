@@ -13,16 +13,17 @@ var app2048 = {};
             borderSize: 0,
             duration: 150
         };
-        alert('screen w:' +screen.width);
-        alert('screen h:' +screen.height);
-        alert('screen h:' +screen.height);
-        alert('clientWidth:' +renderPhar.contentBlock.clientWidth);
+
         if(screen.width > screen.height){
             renderPhar.cellSize = screen.height / renderPhar.fieldSize / 4;
-            if(renderPhar.cellSize > 80) renderPhar.cellSize = 80;
         }else{
             renderPhar.cellSize = renderPhar.contentBlock.clientWidth / renderPhar.fieldSize / 1.5;
         }
+        if(renderPhar.cellSize > 80) renderPhar.cellSize = 80;
+        alert('screen w:' +screen.width+"\n"+
+            'screen h:' +screen.height+"\n"+
+            'renderPhar.cellSize:' +renderPhar.cellSize+"\n"+
+            'clientWidth:' +renderPhar.contentBlock.clientWidth);
         renderPhar.fullCellSize = renderPhar.borderSize * 2 + renderPhar.cellSize;
         renderPhar.getFontSize = function (textLength){
             var result = renderPhar.cellSize / 2;
