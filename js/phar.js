@@ -9,11 +9,12 @@ var app2048 = {};
             turnBlock: document.getElementById('turn').querySelector('span'),
             scoreBlock: document.getElementById('score').querySelector('span'),
             resetBlock: document.getElementById("reset"),
+            fieldSize: 4,
             borderSize: 0,
             duration: 150,
             screen: (screen.width < screen.height) ? screen.width : screen.height
         };
-        renderPhar.cellSize = (renderPhar.screen > 768) ? 80 : (renderPhar.screen / 4 ) / 2;
+        renderPhar.cellSize = (screen.width > 768) ? 80 : (renderPhar.screen / renderPhar.fieldSize) * 0.75;
         renderPhar.fullCellSize = renderPhar.borderSize * 2 + renderPhar.cellSize;
         renderPhar.getFontSize = function (textLength){
             var result = renderPhar.cellSize / 2;
@@ -29,7 +30,7 @@ var app2048 = {};
         };
 
         return {
-            size: 4,
+            size: renderPhar.fieldSize,
             victoryCondition: 2048,
             direction: {
                 left: {
