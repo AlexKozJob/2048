@@ -14,7 +14,7 @@ var app2048 = {};
             duration: 150
         };
         if(renderPhar.contentBlock.clientWidth > screen.height){
-            renderPhar.cellSize = screen.height / renderPhar.fieldSize / 2;
+            renderPhar.cellSize = screen.height / renderPhar.fieldSize / 4;
             if(renderPhar.cellSize > 80) renderPhar.cellSize = 80;
         }else{
             renderPhar.cellSize = renderPhar.contentBlock.clientWidth / renderPhar.fieldSize / 1.5;
