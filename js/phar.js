@@ -15,15 +15,10 @@ var app2048 = {};
         };
 
         if(screen.width > screen.height){
-            renderPhar.cellSize = screen.height / renderPhar.fieldSize / 4;
+            renderPhar.cellSize = 80;
         }else{
-            renderPhar.cellSize = renderPhar.contentBlock.clientWidth / renderPhar.fieldSize / 1.5;
+            renderPhar.cellSize = 60;
         }
-        if(renderPhar.cellSize > 80) renderPhar.cellSize = 80;
-        alert('screen w:' +screen.width+"\n"+
-            'screen h:' +screen.height+"\n"+
-            'renderPhar.cellSize:' +renderPhar.cellSize+"\n"+
-            'clientWidth:' +renderPhar.contentBlock.clientWidth);
         renderPhar.fullCellSize = renderPhar.borderSize * 2 + renderPhar.cellSize;
         renderPhar.getFontSize = function (textLength){
             var result = renderPhar.cellSize / 2;
