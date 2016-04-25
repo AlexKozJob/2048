@@ -11,14 +11,9 @@ var app2048 = {};
             resetBlock: document.getElementById("reset"),
             fieldSize: 4,
             borderSize: 0,
-            duration: 150
+            duration: 150,
+            cellSize: 80
         };
-
-        if(screen.width > screen.height){
-            renderPhar.cellSize = 80;
-        }else{
-            renderPhar.cellSize = 60;
-        }
         renderPhar.fullCellSize = renderPhar.borderSize * 2 + renderPhar.cellSize;
         renderPhar.getFontSize = function (textLength){
             var result = renderPhar.cellSize / 2;
